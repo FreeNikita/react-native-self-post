@@ -1,11 +1,13 @@
 import React from 'react';
 import {View, Text, StyleSheet} from "react-native";
 
-export const PostScreen = () => {
+export const PostScreen = ({route}) => {
+  const {postId} = route.params;
+
   return (
     <View style={styles.center}>
       <Text>
-        PostScreen
+        {postId}
       </Text>
     </View>
   )
