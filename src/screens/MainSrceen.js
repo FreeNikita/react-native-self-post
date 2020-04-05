@@ -26,7 +26,8 @@ export const MainScreen = ({navigation}) => {
           onPress={() => console.log('Open menu')}
         />
       </HeaderButtons>
-    )
+    ),
+    title: "All post"
   });
 
   const onPress = ({id, text}) => {
