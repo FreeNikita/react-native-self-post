@@ -1,20 +1,9 @@
 import React from 'react';
-import {View, Text, StyleSheet} from "react-native";
+import {DATA} from "../data";
+import {Posts} from "../components/Posts";
 
-export const BookedScreen = () => {
-  return (
-    <View style={styles.center}>
-      <Text>
-        BookedScreen
-      </Text>
-    </View>
-  )
+export const BookedScreen = ({navigation}) => {
+  const posts = DATA.filter(post => post.booked);
+
+  return <Posts posts={posts} navigation={navigation} />
 };
-
-const styles = StyleSheet.create({
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-});

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "HelloWorld",
+    "name": "reat-native-self-post",
     "slug": "react-native-self-post",
     "platforms": [
       "ios",
