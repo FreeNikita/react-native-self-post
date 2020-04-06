@@ -3,7 +3,7 @@ import {DATA} from "../data";
 import {Posts} from "../components/Posts";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import {AppHeaderIcon} from "../components/AppHeaderIcon";
-import {useNavigation} from "@react-navigation/native";
+import {useNavigation, useRoute} from "@react-navigation/native";
 
 export const MainScreen = () => {
   const navigation = useNavigation();
@@ -14,7 +14,7 @@ export const MainScreen = () => {
         <Item
           title='Take photo'
           iconName='ios-camera'
-          onPress={() => console.log('Press photo')}
+          onPress={() => navigation.navigate('CreatePostMenu')}
         />
       </HeaderButtons>
     ),
@@ -23,7 +23,7 @@ export const MainScreen = () => {
         <Item
           title='Open menu'
           iconName='ios-menu'
-          onPress={() => console.log('Open menu')}
+          onPress={navigation.openDrawer}
         />
       </HeaderButtons>
     ),

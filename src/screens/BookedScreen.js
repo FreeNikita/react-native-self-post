@@ -24,7 +24,7 @@ export const BookedScreen = () => {
         <Item
           title='Open menu'
           iconName='ios-menu'
-          onPress={() => console.log('Open menu')}
+          onPress={navigation.openDrawer}
         />
       </HeaderButtons>
     ),
