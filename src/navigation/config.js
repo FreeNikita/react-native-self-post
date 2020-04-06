@@ -32,3 +32,11 @@ export const configAndroid = {
     headerTintColor: THEME.WHITE_COLOR
   }
 };
+
+export const configDrawer = {
+  activeTintColor: THEME.MAIN_COLOR,
+  labelStyle: {
+    fontFamily: THEME.BOLD_FONT
+  },
+  label: '123'
+};

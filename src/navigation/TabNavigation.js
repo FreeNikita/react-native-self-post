@@ -15,12 +15,12 @@ export function TabsPostScreens() {
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({color}) => (
-          <Ionicons size={25} color={color} name={route.name === 'Post' ? "ios-albums" : "ios-star"}/>),
+          <Ionicons size={25} color={color} name={route.name === 'PostsTab' ? "ios-albums" : "ios-star"}/>),
       })}
       {...navigatorOption}
     >
-      <Tab.Screen name="PostsTab" component={PostsScreens}/>
-      <Tab.Screen name="FavoritePostsTab" component={BookedPostsScreens}/>
+      <Tab.Screen options={{tabBarLabel: "Post"}} name="PostsTab" component={PostsScreens}/>
+      <Tab.Screen options={{tabBarLabel: "Favorite"}} name="FavoritePostsTab" component={BookedPostsScreens}/>
     </Tab.Navigator>
   )
 }
