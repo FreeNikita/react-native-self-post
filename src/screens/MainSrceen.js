@@ -1,12 +1,15 @@
-import React from 'react';
-import {DATA} from "../data";
+import React, { useEffect } from 'react';
 import {Posts} from "../components/Posts";
+import {useDispatch, useSelector} from "react-redux";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import {AppHeaderIcon} from "../components/AppHeaderIcon";
-import {useNavigation, useRoute} from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
+import {loadPost} from "../store/actions/post";
 
 export const MainScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const allPost = useSelector(state => state.post.allPosts);
 
   navigation.setOptions({
     headerRight: () => (
@@ -30,5 +33,9 @@ export const MainScreen = () => {
     title: "All post"
   });
 
-  return <Posts posts={DATA} navigation={navigation} />
+  useEffect(() => {
+    dispatch(loadPost())
+  }, [dispatch]);
+
+  return <Posts posts={allPost} navigation={navigation} />
 };

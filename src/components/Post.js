@@ -9,7 +9,7 @@ export const Post = ({post, onOpen}) => {
         <ImageBackground source={{url: post.img}} style={styles.image}>
           <View style={styles.textWrap}>
             <Text style={styles.title}>
-              {new Date(post.date).toLocaleDateString()}
+              {post.title}
             </Text>
           </View>
         </ImageBackground>

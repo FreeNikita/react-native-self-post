@@ -1,13 +1,15 @@
-import React from 'react';
-import {DATA} from "../data";
+import React, {useEffect} from 'react';
 import {Posts} from "../components/Posts";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import {AppHeaderIcon} from "../components/AppHeaderIcon";
 import {useNavigation} from "@react-navigation/native";
+import {useDispatch, useSelector} from "react-redux";
+import {loadPost} from "../store/actions/post";
 
 export const BookedScreen = () => {
   const navigation = useNavigation();
-  const posts = DATA.filter(post => post.booked);
+  const dispatch = useDispatch();
+  const allPost = useSelector(state => state.post.bookPosts);
 
   navigation.setOptions({
     headerRight: () => (
@@ -31,5 +33,9 @@ export const BookedScreen = () => {
     title: "Favorite post"
   });
 
-  return <Posts posts={posts} navigation={navigation} />
+  useEffect(() => {
+    dispatch(loadPost())
+  }, [dispatch]);
+
+  return <Posts posts={allPost} navigation={navigation} />
 };

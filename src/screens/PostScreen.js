@@ -1,29 +1,37 @@
-import React, {useLayoutEffect} from 'react';
+import React from 'react';
 import {View, ScrollView, Text, Image, Button, Alert, StyleSheet} from "react-native";
-import {DATA} from "../data";
+import {useDispatch, useSelector} from "react-redux";
 import {THEME} from "../theme";
 import {AppHeaderIcon} from "../components/AppHeaderIcon";
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import {removePost, toggleBooked} from "../store/actions/post";
+import {useNavigation, useRoute} from "@react-navigation/native";
 
-export const PostScreen = ({route, navigation}) => {
+export const PostScreen = ({}) => {
+
+  const navigation = useNavigation();
+  const route = useRoute();
+
   const {postId} = route.params;
+  const dispatch = useDispatch();
+  const post = useSelector(
+    state => state.post.allPosts.find(({id}) => id === postId),
+    (prevPost, currentPost) => prevPost.booked !== currentPost.booked
+  );
 
-  const post = DATA.find(post => post.id === postId);
-  const iconStar = post.booked ? "ios-star" : 'ios-star-outline';
+  if (!post) {
+    return null
+  }
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTitle: new Date(post.date).toLocaleDateString(),
-    });
-  }, [navigation]);
+  navigation.setOptions({headerTitle: post.title});
 
   navigation.setOptions({
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={AppHeaderIcon} title='isBooked'>
         <Item
           title='Take photo'
-          iconName={iconStar}
-          onPress={() => console.log('isBooked')}
+          iconName={post.booked ? "ios-star" : 'ios-star-outline'}
+          onPress={() => dispatch(toggleBooked(post.id))}
         />
       </HeaderButtons>
     ),
@@ -38,7 +46,14 @@ export const PostScreen = ({route, navigation}) => {
           text: 'Cancel',
           style: 'cancel',
         },
-        {text: 'Remove', onPress: () => console.log('OK Pressed'), style: 'destructive'},
+        {
+          text: 'Remove',
+          style: 'destructive',
+          onPress: () => {
+            navigation.goBack();
+            dispatch(removePost(post.id))
+          }
+        },
       ],
       {cancelable: false},
     );
@@ -51,8 +66,9 @@ export const PostScreen = ({route, navigation}) => {
         <Text style={styles.title}>
           {post.text}
         </Text>
+        <Text style={styles.date}>Create: <Text style={styles.bold}>{new Date(post.date).toLocaleDateString()}</Text></Text>
       </View>
-      <Button title="delete" onPress={() => removeHandler()} color={THEME.DANGER_COLOR}/>
+      <Button title="Delete" onPress={() => removeHandler()} color={THEME.DANGER_COLOR}/>
     </ScrollView>
   )
 };
@@ -70,5 +86,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: THEME.REGULAT_FONT
+  },
+  date: {
+    marginTop: 5
+  },
+  bold: {
+    fontFamily: THEME.BOLD_FONT
   }
 });

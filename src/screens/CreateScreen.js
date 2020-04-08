@@ -1,15 +1,11 @@
 import React from 'react';
 import {View, Text, StyleSheet} from "react-native";
-import {useNavigation, useRoute} from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import {AppHeaderIcon} from "../components/AppHeaderIcon";
 
 export const CreateScreen = () => {
   const navigation = useNavigation();
-
-  const route = useRoute();
-
-  console.log(route)
 
   navigation.setOptions({
     headerLeft: () => (
