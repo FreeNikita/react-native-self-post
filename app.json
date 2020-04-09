@@ -1,28 +1,36 @@
 {
   "expo": {
-    "name": "reat-native-self-post",
-    "slug": "react-native-self-post",
+    "name": "Photos note",
+    "slug": "react-native-photos-note",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "1.0.4",
+    "privacy": "public",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#242832"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 10
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nikitests.camera",
+      "buildNumber": "1.0.4"
+    },
+    "android": {
+      "package": "com.nikitests.camera",
+      "versionCode": 3,
+      "permissions": ["CAMERA",  "WRITE_EXTERNAL_STORAGE"]
     }
   }
 }

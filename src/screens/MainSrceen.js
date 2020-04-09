@@ -39,7 +39,7 @@ export const MainScreen = () => {
     dispatch(loadPost())
   }, [dispatch]);
 
-  if(isLoading) return <Loading/>;
+  if(isLoading) return <Loading />;
 
   return <Posts posts={allPost} navigation={navigation} />
 };
