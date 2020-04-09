@@ -1,10 +1,9 @@
 import {ADD_POST, LOAD_POST, REMOVE_POST, TOGGLE_BOOKED} from "../type";
-import {DATA} from "../../data";
 
 export const loadPost = () => {
   return {
     type: LOAD_POST,
-    payload: {posts: DATA}
+    payload: {posts: []}
   }
 };
 

@@ -16,10 +16,10 @@ export const CreateScreen = () => {
   const dispatch = useDispatch();
 
   const savePost = () => {
-    if(!imgRef.current){
-      Alert.alert("Error", "Please upload image");
-      return
-    }
+    // if(!imgRef.current){
+    //   Alert.alert("Error", "Please upload image");
+    //   return
+    // }
 
     const post = {
       date: new Date().toJSON(),
