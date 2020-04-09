@@ -1,28 +1,39 @@
-import React, {useState} from 'react';
-import {ScrollView, View, TouchableWithoutFeedback, Text, TextInput, Image, Button, Keyboard, StyleSheet} from "react-native";
+import React, {useState, useRef} from 'react';
+import {ScrollView, View, TouchableWithoutFeedback, Text, TextInput, Alert, Button, Keyboard, StyleSheet} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch} from "react-redux";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import {AppHeaderIcon} from "../components/AppHeaderIcon";
 import {THEME} from "../theme";
 import {addPost} from "../store/actions/post";
+import {PhotoPicker} from "../components/photoPicker";
 
 export const CreateScreen = () => {
   const navigation = useNavigation();
   const [text, setTest] = useState('');
   const [title, setTitle] = useState('');
+  const imgRef = useRef();
   const dispatch = useDispatch();
 
   const savePost = () => {
+    if(!imgRef.current){
+      Alert.alert("Error", "Please upload image");
+      return
+    }
+
     const post = {
       date: new Date().toJSON(),
-      img: "https://static.coindesk.com/wp-content/uploads/2019/01/shutterstock_1012724596-860x430.jpg",
+      img: imgRef.current,
       booked: false,
       text,
       title,
     };
     dispatch(addPost(post));
     navigation.navigate("HomeMenu");
+  };
+
+  const photoPickHandler = (url) => {
+    imgRef.current = url
   };
 
   navigation.setOptions({
@@ -57,9 +68,12 @@ export const CreateScreen = () => {
             value={text}
             onChangeText={setTest}
           />
-          <Image style={styles.image}
-                 source={{uri: "https://static.coindesk.com/wp-content/uploads/2019/01/shutterstock_1012724596-860x430.jpg"}}/>
-          <Button title={"Create post"} onPress={savePost}/>
+          <PhotoPicker onPick={photoPickHandler}/>
+          <Button
+            title={"Create post"}
+            onPress={savePost}
+            disabled={!title}
+          />
         </View>
       </TouchableWithoutFeedback>
     </ScrollView>
