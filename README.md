@@ -4,5 +4,4 @@
 
 
 
-expo build:ios
-expo build:android
+Need fix with reset image ( on page CreatePost)
