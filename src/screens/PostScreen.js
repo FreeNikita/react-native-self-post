@@ -31,7 +31,7 @@ export const PostScreen = ({}) => {
         <Item
           title='Take photo'
           iconName={post.booked ? "ios-star" : 'ios-star-outline'}
-          onPress={() => dispatch(toggleBooked(post.id))}
+          onPress={() => dispatch(toggleBooked(post))}
         />
       </HeaderButtons>
     ),

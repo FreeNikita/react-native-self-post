@@ -5,11 +5,13 @@ import {AppHeaderIcon} from "../components/AppHeaderIcon";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
 import {loadPost} from "../store/actions/post";
+import {Loading} from "../components/AppLoading";
 
 export const BookedScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const allPost = useSelector(state => state.post.bookPosts);
+  const isLoading = useSelector(state => state.post.loading);
 
   navigation.setOptions({
     headerRight: () => (
@@ -36,6 +38,8 @@ export const BookedScreen = () => {
   useEffect(() => {
     dispatch(loadPost())
   }, [dispatch]);
+
+  if(isLoading) return <Loading/>;
 
   return <Posts posts={allPost} navigation={navigation} />
 };
