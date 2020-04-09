@@ -8,7 +8,7 @@ export class DB {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
         tx.executeSql(
-          'CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY NOT NULL, text TEXT NOT NULL, title TEXT NOT NULL, img TEXT, date TEXT, booked INT)',
+          'CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY NOT NULL, text TEXT NOT NULL, title TEXT, img TEXT, date TEXT, booked INT)',
           [],
           resolve,
           (_, error) => reject(error)
@@ -34,7 +34,7 @@ export class DB {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
         tx.executeSql(
-          `INSERT INTO posts (text, title, date, booked, img) VALUES (?, ?, ?, ?)`,
+          `INSERT INTO posts (text, title, date, booked, img) VALUES (?, ?, ?, ?, ?)`,
           [text, title, date, 0, img],
           (_, result) => resolve(result.insertId),
           (_, error) => reject(error)

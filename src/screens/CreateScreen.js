@@ -16,10 +16,10 @@ export const CreateScreen = () => {
   const dispatch = useDispatch();
 
   const savePost = () => {
-    // if(!imgRef.current){
-    //   Alert.alert("Error", "Please upload image");
-    //   return
-    // }
+    if(!imgRef.current){
+      Alert.alert("Error", "Please upload image");
+      return
+    }
 
     const post = {
       date: new Date().toJSON(),
@@ -30,6 +30,9 @@ export const CreateScreen = () => {
     };
     dispatch(addPost(post));
     navigation.navigate("HomeMenu");
+    imgRef.current = null;
+    setTest('');
+    setTitle('');
   };
 
   const photoPickHandler = (url) => {
@@ -68,7 +71,7 @@ export const CreateScreen = () => {
             value={text}
             onChangeText={setTest}
           />
-          <PhotoPicker onPick={photoPickHandler}/>
+          <PhotoPicker onPick={photoPickHandler} />
           <Button
             title={"Create post"}
             onPress={savePost}

@@ -27,7 +27,7 @@ export const PhotoPicker = ({ onPick }) => {
     }
 
     const img = await ImagePicker.launchCameraAsync({
-      quality: 0.7,
+      quality: 1,
       allowsEditing: false,
       aspect: [16, 9]
     });
@@ -39,7 +39,7 @@ export const PhotoPicker = ({ onPick }) => {
   return (
     <View style={styles.wrap}>
       <Button title={'Create Photo'} onPress={takePhoto}/>
-      {image && <Image source={{url: image}} style={styles.image}/>}
+      {image && <Image source={{uri: image}} style={styles.image}/>}
     </View>
   )
 };

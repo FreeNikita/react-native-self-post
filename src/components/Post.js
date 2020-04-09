@@ -6,7 +6,7 @@ export const Post = ({post, onOpen}) => {
   return (
     <TouchableOpacity activeOpacity={0.6} onPress={() => onOpen(post)}>
       <View style={styles.post}>
-        <ImageBackground source={{url: post.img}} style={styles.image}>
+        <ImageBackground source={{uri: post.img}} style={styles.image}>
           <View style={styles.textWrap}>
             <Text style={styles.title}>
               {post.title}
